@@ -1,3 +1,4 @@
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -20,6 +21,7 @@ body {
     background-color: #f4f4f4;
     height: 100%;
 }
+
 
 .clearfix:after {
     display: block;
@@ -50,6 +52,10 @@ input {
 h1, h2, h3, h4, h5, h6 {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+h2{
+    padding: 10px;
 }
 
 h1 {
@@ -121,10 +127,10 @@ button.accent {
     margin-top: 10px;
 }
 
-
 #chat-page {
     position: relative;
     height: 100%;
+    padding: 20px;
 }
 
 .chat-container {
@@ -139,6 +145,7 @@ button.accent {
     position: relative;
 }
 
+
 #chat-page ul {
     list-style-type: none;
     background-color: #FFF;
@@ -149,10 +156,46 @@ button.accent {
     height: calc(100% - 150px);
 }
 
-#chat-page #messageForm {
+#messageForm {
     padding: 20px;
+    border-top: 1px solid #ececec; /* Add a separator above the form */
+    background-color: #fff; /* Match chat container background */
 }
 
+/* Style the input group using flexbox for better alignment */
+#messageForm .input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+/* Style the input field */
+#messageForm .input-group input {
+    flex: 1; /* Take remaining space */
+    width: auto; /* Override previous width */
+    padding: 10px;
+    border: 1px solid #c8c8c8;
+    border-radius: 20px; /* Rounded corners for modern look */
+    font-size: 14px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+/* Style the send button */
+#messageForm .input-group button {
+    width: auto; /* Override previous width */
+    padding: 10px 20px; /* Consistent padding */
+    border-radius: 20px; /* Match input field */
+    background-color: #05627f; /* Primary color */
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#messageForm .input-group button:hover {
+    background-color: #044e63; /* Darker shade on hover */
+}
 #chat-page ul li {
     line-height: 1.5rem;
     padding: 10px 20px;
@@ -181,107 +224,65 @@ button.accent {
     position: relative;
 }
 
+/* Existing styles remain unchanged until the chat-message section */
+#chat-page .chat-message {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 10px;
+    max-width: fit-content;
+    word-wrap: break-word;
+    background-color: #f1f0f0; /* Gray for others' messages */
+    position: relative; /* Ensure positioning context */
+}
+
+#chat-page .chat-message.self {
+    margin-left: auto;
+    background-color: #dcf8c6 !important; /* Force light green for self */
+    flex-direction: row-reverse;
+}
+
+#chat-page .chat-message.self i {
+    display: none !important; /* Ensure avatar is hidden */
+}
+
+#chat-page .chat-message.self span {
+    display: none !important; /* Ensure username is hidden */
+}
+
 #chat-page .chat-message i {
-    position: absolute;
-    width: 42px;
-    height: 42px;
-    overflow: hidden;
-    left: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 18px;
-    line-height: 42px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     color: #fff;
     text-align: center;
-    border-radius: 50%;
-    font-style: normal;
-    text-transform: uppercase;
+    line-height: 35px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    background-color: #ff9800; /* Consistent avatar color for debug */
 }
 
 #chat-page .chat-message span {
-    color: #333;
-    font-weight: 600;
+    font-weight: bold;
+    margin-right: 5px;
 }
 
-#chat-page .chat-message p {
-    color: #43464b;
+/* Ensure the text content (username and message) is stacked vertically for others' messages */
+#chat-page .chat-message:not(.self) .text-content {
+    display: flex;
+    flex-direction: column;
 }
 
-#messageForm .input-group input {
-    float: left;
-    width: calc(100% - 85px);
+/* Style the username to ensure it appears on its own line */
+#chat-page .chat-message:not(.self) span {
+    font-weight: bold;
+    margin-bottom: 5px; /* Space between username and message */
 }
 
-#messageForm .input-group button {
-    float: left;
-    width: 80px;
-    height: 38px;
-    margin-left: 5px;
-}
-
-.chat-header {
-    text-align: center;
-    padding: 15px;
-    border-bottom: 1px solid #ececec;
-}
-
-.chat-header h2 {
-    margin: 0;
-    font-weight: 500;
-}
-
-.connecting {
-    padding-top: 5px;
-    text-align: center;
-    color: #777;
-    position: absolute;
-    top: 65px;
-    width: 100%;
+/* Style the message text */
+#chat-page .chat-message:not(.self) p {
+    margin: 0; /* Remove default margin for clean layout */
 }
 
 
-@media screen and (max-width: 730px) {
-
-    .chat-container {
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .chat-container {
-        height: calc(100% - 30px);
-    }
-
-    .username-page-container {
-        width: auto;
-        margin-left: 15px;
-        margin-right: 15px;
-        padding: 25px;
-    }
-
-    #chat-page ul {
-        height: calc(100% - 120px);
-    }
-
-    #messageForm .input-group button {
-        width: 65px;
-    }
-
-    #messageForm .input-group input {
-        width: calc(100% - 70px);
-    }
-
-    .chat-header {
-        padding: 10px;
-    }
-
-    .connecting {
-        top: 60px;
-    }
-
-    .chat-header h2 {
-        font-size: 1.1em;
-    }
-}
