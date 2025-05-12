@@ -2,7 +2,8 @@ package com.chat.chatApplication.chat;
 
 import lombok.*;
 
-import java.awt.*;
+import com.chat.chatApplication.chat.MessageType;
+
 
 @Getter
 @Setter
@@ -13,4 +14,6 @@ public class ChatMessage {
     private String content;
     private String sender;
     private MessageType type;
+
+
 }
